@@ -1,0 +1,23 @@
+﻿name: Issues echo
+
+on:
+  issues:
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo basic issue fields
+        run: |
+          echo "action=${{ github.event.action }}"
+          echo "repo=${{ github.repository }}"
+          echo "issue_number=${{ github.event.issue.number }}"
+          echo "title=${{ github.event.issue.title }}"
+          echo "body=${{ github.event.issue.body }}"
+          echo "author=${{ github.event.issue.user.login }}"
+          echo "state=${{ github.event.issue.state }}"
+          echo "labels=${{ toJson(github.event.issue.labels) }}"
+          echo "html_url=${{ github.event.issue.html_url }}"
+
+      - name: print raw event json
+        run: cat "$GITHUB_EVENT_PATH"
